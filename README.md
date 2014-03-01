@@ -8,6 +8,12 @@ Download and configure
 
 > Requires node and npm. For ubuntu: ```sudo apt-get install nodejs npm```
 
+```
+@> sudo npm install -g lxc-dns
+@> lxc-dns
+```
+
+From git:
 
 ```
 @> git clone https://github.com/eazel7/lxc-dns.git lxc-dns

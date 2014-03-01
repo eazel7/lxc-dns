@@ -49,12 +49,34 @@ server.on('request', function (request, response) {
             ttl: 500,
         }));
 
+        response.send();
+
         // console.log(name + ' = ' + ipv4);
     } else {
-       //  console.log('This DNS doesn\'t know about: ' + name);
-    }
+        // ask google
+        var req = dns.Request({
+          question: dns.Question({
+            name: request.question[0].name,
+            type: request.question[0].type
+          }),
+          server: { address: '8.8.8.8', port: 53, type: 'udp' },
+          timeout: 1000,
+        });
 
-    response.send();
+        req.on('timeout', function () {
+          response.send();
+        });
+
+        req.on('message', function (err, answer) {
+          answer.answer.forEach(function (a) {
+            response.answer.push(a);
+          });
+
+          response.send();
+        });
+
+        req.send();
+    }
 });
 
 server.on('error', function (err, buff, req, res) {

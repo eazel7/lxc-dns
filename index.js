@@ -49,9 +49,9 @@ server.on('request', function (request, response) {
             ttl: 500,
         }));
 
-        console.log(name + ' = ' + ipv4);
+        // console.log(name + ' = ' + ipv4);
     } else {
-        console.log('This DNS doesn\'t know about: ' + name);
+       //  console.log('This DNS doesn\'t know about: ' + name);
     }
 
     response.send();

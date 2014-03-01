@@ -1,8 +1,11 @@
 {
   "name": "lxc-dns",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "DNS server for local lxc instances",
   "main": "index.js",
+  "bin": {
+     "lxc-dns": "bin/lxc-dns.sh"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

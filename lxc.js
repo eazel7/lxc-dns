@@ -32,7 +32,9 @@ module.exports = function(config){
 
         var output = '';
         var colNames = ['name','state', 'ipv4','autostart'];
-        sysExec('lxc-ls --fancy --fancy-format=name,state,ipv4,ipv6,autostart', function(data){output+=data}, function(error){
+        sysExec('lxc-ls --fancy --fancy-format=name,state,autostart,ipv4', function(data){output+=data}, function(error){
+
+            //console.log(output)
 
             output = output.split("\n");
             
@@ -53,15 +55,18 @@ module.exports = function(config){
                     columns.push(withoutTrim[j]);
                     }
                 };
+                // console.log(columns);
                 var container = {
                  name: columns[0],
                  status: columns[1],
-                 ipv4: columns[2],
-                 ipv6: columns[3],
-                 autostart: columns[4]
+                 autostart: columns[2]
                 };
-                
+                var ipv4addresses = columns.slice(3);
+
                 if (container.name) {
+                    if (ipv4addresses[0].indexOf('-') == -1) {
+                        container.ipv4 = ipv4addresses[0].replace(',', '').replace(' ', '');
+                    }
                     result[container.name] = container; 
                 }
             }

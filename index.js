@@ -27,6 +27,7 @@ setInterval(function () {
            suffix && (t[containerName + suffix] = data[containerName].ipv4);
         }
       }
+
       containers = t;
   });
 

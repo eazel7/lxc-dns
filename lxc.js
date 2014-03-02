@@ -64,7 +64,7 @@ module.exports = function(config){
                 var ipv4addresses = columns.slice(3);
 
                 if (container.name) {
-                    if (ipv4addresses[0].indexOf('-') == -1) {
+                    if (ipv4addresses && ipv4addresses[0] && ipv4addresses[0].indexOf('-') == -1) {
                         container.ipv4 = ipv4addresses[0].replace(',', '').replace(' ', '');
                     }
                     result[container.name] = container; 
